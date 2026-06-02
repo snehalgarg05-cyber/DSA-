@@ -1,46 +1,46 @@
-class MinStack {
-public:
-    stack<int> st;
-    stack<int>copy;
-    MinStack() {
+// class MinStack {
+// public:
+//     stack<int> st;
+//     stack<int>copy;
+//     MinStack() {
         
-    }
+//     }
     
-    void push(int val) {
-        st.push(val);
-    }
+//     void push(int val) {
+//         st.push(val);
+//     }
     
-    void pop() {
-        if(st.empty()){
-            return;
-        }
-        st.pop();
-    }
+//     void pop() {
+//         if(st.empty()){
+//             return;
+//         }
+//         st.pop();
+//     }
     
-    int top() {
-       if(st.empty()){
-        return -1;
-       } 
-       return st.top();
-    }
+//     int top() {
+//        if(st.empty()){
+//         return -1;
+//        } 
+//        return st.top();
+//     }
     
-    int getMin() {
-        int min=INT_MAX;
-        int n = st.size();
-        while(!st.empty()){
-            if(st.top()<min){
-                min=st.top();
-            }
-            copy.push(st.top());
-            st.pop();
-        }
-        while(!copy.empty()){
-            st.push(copy.top());
-            copy.pop();
-        }
-        return min;
-    }
-};
+//     int getMin() {
+//         int min=INT_MAX;
+//         int n = st.size();
+//         while(!st.empty()){
+//             if(st.top()<min){
+//                 min=st.top();
+//             }
+//             copy.push(st.top());
+//             st.pop();
+//         }
+//         while(!copy.empty()){
+//             st.push(copy.top());
+//             copy.pop();
+//         }
+//         return min;
+//     }
+// };
 
 /**
  * Your MinStack object will be instantiated and called as such:
@@ -50,3 +50,41 @@ public:
  * int param_3 = obj->top();
  * int param_4 = obj->getMin();
  */
+
+
+ class MinStack {
+public:
+    
+    stack<int> st;
+    stack<int> minSt;
+
+    MinStack() {
+        
+    }
+    
+    void push(int val) {
+        st.push(val);
+
+        if(minSt.empty() || val <= minSt.top()){
+            minSt.push(val);
+        }
+    }
+    
+    void pop() {
+        if(st.empty()) return;
+
+        if(st.top() == minSt.top()){
+            minSt.pop();
+        }
+
+        st.pop();
+    }
+    
+    int top() {
+        return st.top();
+    }
+    
+    int getMin() {
+        return minSt.top();
+    }
+};
