@@ -1,4 +1,4 @@
-class Solution {
+class Solution {  //by sorting and not optimal
 public:
     int maxIceCream(vector<int>& costs, int coins) {
         int max_icreams=0;
@@ -16,3 +16,37 @@ public:
         return max_icreams;
     }
 };
+
+
+// class Solution {
+// public:
+//     int maxIceCream(vector<int>& costs, int coins) {
+//         int max_icreams=0;
+        
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
