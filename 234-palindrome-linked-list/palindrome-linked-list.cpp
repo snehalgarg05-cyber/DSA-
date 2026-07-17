@@ -8,26 +8,95 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+// class Solution {
+// public:
+//     bool isPalindrome(ListNode* head) {//SC-O(N) AS VECTOR
+//         vector<int>result;
+//         ListNode*temp=head;
+        
+//         while(temp){
+//             result.push_back(temp->val);
+//             temp=temp->next;
+//         }
+//         int n = result.size();
+//         int start=0,end=n-1;
+//         while(start<=end){
+//             if(result[start]!=result[end]){
+//                 return false;
+//             }
+//             start++,end--;
+//         }
+//         return true;
+//     }
+// };
+
+
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(head==NULL|| head->next==NULL){
+
+        int count=0;
+        ListNode*temp=head;
+        while(temp){
+            count++;
+            temp=temp->next;
+        }
+        if(count==1){
             return true;
         }
-        vector<int> result;
-        ListNode*curr=head;
-        while(curr){
-            result.push_back(curr->val);
+        count=count/2;
+        
+        ListNode*curr=head,*prev=NULL;
+        while(count--){
+            prev=curr;
             curr=curr->next;
         }
-        int n = result.size();
-        int start=0,end=n-1;
-        while(start<=end){
-            if(result[start]!=result[end]){
+        prev->next=NULL;
+        ListNode*tail=curr;
+        while(tail->next!=NULL){
+            tail=tail->next;
+        }
+        ListNode*fut;
+        while(curr){
+            fut=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=fut;
+        }
+        while(head!=NULL){
+            if(head->val!=tail->val){
                 return false;
             }
-            start++,end--;
+            head=head->next;
+            tail=tail->next;
         }
         return true;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
